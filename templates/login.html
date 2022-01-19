@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Login | Sumridh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="StyleSheet" href="https://acloud.guru/auth0/css/main.css" />
+    <style type="text/css">
+      @font-face {
+        font-family: 'GT Walsheim';
+        font-weight: 600;
+        src: url(https://acloud.guru/fonts/gt-walsheim/gt-walsheim-medium-web.eot?)
+            format('eot'),
+          url(https://acloud.guru/fonts/gt-walsheim/gt-walsheim-medium-web.woff)
+            format('woff'),
+          url(https://acloud.guru/fonts/gt-walsheim/gt-walsheim-medium-web.ttf)
+            format('truetype'),
+          url(https://acloud.guru/fonts/gt-walsheim/gt-walsheim-medium-web.svg#GT_Walsheim)
+            format('svg');
+      }
+
+      html {
+        height: 100%;
+        text-align: center;
+        background-color: #10065e;
+        background-image: linear-gradient(#070247, #10065e);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+        color: #fff;
+      }
+
+      .LoginCopy {
+        padding: 30px 0;
+      }
+
+      .LoginCopy img {
+        width: 200px;
+        margin-bottom: 20px;
+      }
+
+      .LoginCopy--Title {
+        font-family: 'GT Walsheim', sans-serif;
+        font-weight: 600;
+        margin: 5px 0;
+      }
+
+      .LoginCopy--ByLine {
+        margin: 5px 0;
+        opacity: 0.8;
+      }
+
+      html .auth0-lock.auth0-lock .auth0-lock-submit {
+        border-radius: 0;
+      }
+
+      html .auth0-lock.auth0-lock .auth0-lock-header {
+        display: none;
+      }
+
+      html .auth0-lock.auth0-lock .auth0-loading-container {
+        transform: translateX(-15px);
+      }
+
+      html .auth0-lock.auth0-lock .auth0-loading-container .auth0-loading {
+        left: 50%;
+      }
+
+      #Auth0Container
+        .auth0-lock-social-button[data-provider^='facebook']
+        .auth0-lock-social-button-icon {
+        background-size: 40% !important;
+      }
+
+      #Auth0Container
+        .auth0-lock-social-button[data-provider^='github']
+        .auth0-lock-social-button-icon {
+        background-size: 50% !important;
+      }
+
+      #Auth0Container
+        .auth0-lock-social-button[data-provider^='google']
+        .auth0-lock-social-button-icon {
+        background-size: 90% !important;
+      }
+
+      #Auth0Container .auth0-lock.auth0-lock .auth0-lock-tabs li a {
+        padding-top: 10px;
+      }
+
+      #Auth0Container
+        .auth0-lock-social-button[data-provider^='google']
+        .auth0-lock-social-button-text {
+        color: black !important;
+      }
+
+      /* Stops background cut off when CAPTCHA is shown */
+      #Auth0Container .auth-lock-social-buttons-pane {
+        padding-bottom: 40px !important;
+      }
+
+      .captcha-block {
+        height: 120px;
+      }
+
+      .custom_icon {
+        width: 32px;
+        height: 32px;
+        padding-right: 16px;
+      }
+
+      #connectionList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        width: 96%;
+      }
+
+      #connectionList li button {
+        background-color: #f6f6f6;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-radius: 2px;
+        height: auto;
+        font-size: 14px;
+        line-height: 1.375rem;
+        padding: 6px;
+        color: rgb(36, 50, 82);
+        background-color: white;
+        border: 1px solid rgb(173, 186, 208);
+      }
+
+      #connectionList #saml-connection-info {
+        display: block;
+        margin-bottom: 0;
+        margin-top: 15px;
+      }
+
+      #connectionList li button:hover {
+        background-color: rgb(249, 251, 253);
+        border-color: rgb(133, 150, 183);
+      }
+    </style>
+    <script src="https://cdn.optimizely.com/js/18250037671.js"></script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-N75NMX8');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Segment -->
+    <script>
+      !(function() {
+        var analytics = (window.analytics = window.analytics || []);
+        if (!analytics.initialize)
+          if (analytics.invoked)
+            window.console &&
+              console.error &&
+              console.error('Segment snippet included twice.');
+          else {
+            analytics.invoked = !0;
+            analytics.methods = [
+              'trackSubmit',
+              'trackClick',
+              'trackLink',
+              'trackForm',
+              'pageview',
+              'identify',
+              'reset',
+              'group',
+              'track',
+              'ready',
+              'alias',
+              'debug',
+              'page',
+              'once',
+              'off',
+              'on',
+              'addSourceMiddleware',
+              'addIntegrationMiddleware',
+              'setAnonymousId',
+              'addDestinationMiddleware',
+            ];
+            analytics.factory = function(e) {
+              return function() {
+                var t = Array.prototype.slice.call(arguments);
+                t.unshift(e);
+                analytics.push(t);
+                return analytics;
+              };
+            };
+            for (var e = 0; e < analytics.methods.length; e++) {
+              var key = analytics.methods[e];
+              analytics[key] = analytics.factory(key);
+            }
+            analytics.load = function(key, e) {
+              var t = document.createElement('script');
+              t.type = 'text/javascript';
+              t.async = !0;
+              t.src =
+                'https://cdn.segment.com/analytics.js/v1/' +
+                key +
+                '/analytics.min.js';
+              var n = document.getElementsByTagName('script')[0];
+              n.parentNode.insertBefore(t, n);
+              analytics._loadOptions = e;
+            };
+            analytics._writeKey = 'nEBcG4FQm7qzJRYmWUBSQbBHphUF7mBl';
+            analytics.SNIPPET_VERSION = '4.13.2';
+            analytics.load('nEBcG4FQm7qzJRYmWUBSQbBHphUF7mBl');
+            analytics.page();
+          }
+      })();
+    </script>
+    <!-- End Segment -->
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-N75NMX8"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!--[if IE 8]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.2.5/ie8.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+      <script src="https://cdn.auth0.com/js/base64.js"></script>
+      <script src="https://cdn.auth0.com/js/es5-shim.min.js"></script>
+    <![endif]-->
+
+    <div class="LoginCopy">
+      <a href="https://acloud.guru/">
+
+      </a>
+      <h1 id="dynamic-page-title" class="LoginCopy--Title">
+        Log In or Sign Up to Continue
+      </h1>
+
+    </div>
+
+    <div id="Auth0Container">
+      <!-- Dynamically injected here -->
+    </div>
+
+    <div class="captcha-block"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfE-PYUAAAAAMTv-W8Mt0OuH-1At18XY24xR0Fj"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.13/auth0.min.js"></script>
+    <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
+    <script src="https://cdn.auth0.com/js/lock/11.24/lock.min.js"></script>
+    <script src="https://connections.acloud.guru/connections.js"></script>
+    <script>
+      // Decode utf8 characters properly
+      $(document).ready(function() {
+        var config = JSON.parse(
+          decodeURIComponent(escape(window.atob('eyJhc3NldHNVcmwiOiIiLCJhdXRoMERvbWFpbiI6ImF1dGguYWNsb3VkLmd1cnUiLCJhdXRoMFRlbmFudCI6ImFjbG91ZGd1cnUiLCJjbGllbnRDb25maWd1cmF0aW9uQmFzZVVybCI6Imh0dHBzOi8vYXV0aC5hY2xvdWQuZ3VydS8iLCJjYWxsYmFja09uTG9jYXRpb25IYXNoIjpmYWxzZSwiY2FsbGJhY2tVUkwiOiJodHRwczovL2xlYXJuLmFjbG91ZC5ndXJ1L2xvZ2luL2NhbGxiYWNrIiwiY2RuIjoiaHR0cHM6Ly9jZG4uYXV0aDAuY29tLyIsImNsaWVudElEIjoiT0tGZzl1b1BNQ05lbHZsdktWRGZQSzc2NkRSZEFZRDUiLCJkaWN0Ijp7InNpZ25pbiI6eyJ0aXRsZSI6InByb2R1Y3Rpb24tbGVhcm4ifX0sImV4dHJhUGFyYW1zIjp7InByb3RvY29sIjoib2F1dGgyIiwicmVzcG9uc2VfdHlwZSI6ImNvZGUgdG9rZW4gaWRfdG9rZW4iLCJhdWRpZW5jZSI6Imh0dHBzOi8vYWNsb3VkZ3VydS5hdXRoMC5jb20vYXBpL3YyLyIsIm5vbmNlIjoiSVV0ZGdjVn5wdDJuTjl4YTNZZmt4d354aXBpaERsVGsiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYXV0aDBDbGllbnQiOiJleUp1WVcxbElqb2lZWFYwYURBdWFuTWlMQ0oyWlhKemFXOXVJam9pT1M0eE15NDBJbjA9IiwiX2NzcmYiOiJaN0Z2c0w1YS0xeV82c3N3OU1VY1pjdXRfbEJVY3plVDJKX28iLCJfaW50c3RhdGUiOiJkZXByZWNhdGVkIiwic3RhdGUiOiJoS0ZvMlNCTGNWa3dUMXA1VWpjM1dFdFpVV294UmpSNGVqTlpObkpqV1V0ZmFFTnJaNkZ1cFd4dloybHVvM1JwWk5rZ0xXTkNhMHgwU3paUVdGcFVaSEZmWm5ocmRsOTFRVmxWYVZSclVIQkhhM2FqWTJsazJTQlBTMFpuT1hWdlVFMURUbVZzZG14MlMxWkVabEJMTnpZMlJGSmtRVmxFTlEifSwiaW50ZXJuYWxPcHRpb25zIjp7InByb3RvY29sIjoib2F1dGgyIiwicmVzcG9uc2VfdHlwZSI6ImNvZGUgdG9rZW4gaWRfdG9rZW4iLCJhdWRpZW5jZSI6Imh0dHBzOi8vYWNsb3VkZ3VydS5hdXRoMC5jb20vYXBpL3YyLyIsIm5vbmNlIjoiSVV0ZGdjVn5wdDJuTjl4YTNZZmt4d354aXBpaERsVGsiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYXV0aDBDbGllbnQiOiJleUp1WVcxbElqb2lZWFYwYURBdWFuTWlMQ0oyWlhKemFXOXVJam9pT1M0eE15NDBJbjA9IiwiX2NzcmYiOiJaN0Z2c0w1YS0xeV82c3N3OU1VY1pjdXRfbEJVY3plVDJKX28iLCJfaW50c3RhdGUiOiJkZXByZWNhdGVkIiwic3RhdGUiOiJoS0ZvMlNCTGNWa3dUMXA1VWpjM1dFdFpVV294UmpSNGVqTlpObkpqV1V0ZmFFTnJaNkZ1cFd4dloybHVvM1JwWk5rZ0xXTkNhMHgwU3paUVdGcFVaSEZmWm5ocmRsOTFRVmxWYVZSclVIQkhhM2FqWTJsazJTQlBTMFpuT1hWdlVFMURUbVZzZG14MlMxWkVabEJMTnpZMlJGSmtRVmxFTlEifSwid2lkZ2V0VXJsIjoiaHR0cHM6Ly9jZG4uYXV0aDAuY29tL3cyL2F1dGgwLXdpZGdldC01LjEubWluLmpzIiwiaXNUaGlyZFBhcnR5Q2xpZW50IjpmYWxzZSwiYXV0aG9yaXphdGlvblNlcnZlciI6eyJ1cmwiOiJodHRwczovL2F1dGguYWNsb3VkLmd1cnUiLCJpc3N1ZXIiOiJodHRwczovL2F1dGguYWNsb3VkLmd1cnUvIn0sImNvbG9ycyI6e319')))
+        );
+        config.extraParams = config.extraParams || {};
+        var connection = config.connection;
+        var prompt = config.prompt;
+        var defaultConnection = 'Username-Password-Authentication';
+
+        // Auth0.js
+        var params = Object.assign(
+          {
+            // required for production
+            overrides: {
+              __tenant: config.auth0Tenant,
+              __token_issuer: 'auth.acloud.guru',
+            },
+            domain: config.auth0Domain,
+            clientID: config.clientID,
+            redirectUri: config.callbackURL,
+            responseType: 'code',
+          },
+          config.internalOptions
+        );
+
+        var webAuth = new auth0.WebAuth(params);
+
+        var rememberLastLogin =
+          config.extraParams.remember_last_login === undefined
+            ? true
+            : JSON.parse(config.extraParams.remember_last_login);
+        var allowLogin =
+          config.extraParams.allow_login === undefined
+            ? true
+            : JSON.parse(config.extraParams.allow_login);
+        var allowSignUp =
+          config.extraParams.allow_sign_up === undefined
+            ? true
+            : JSON.parse(config.extraParams.allow_sign_up);
+        var initialScreen =
+          config.extraParams.initial_screen === undefined
+            ? 'login'
+            : config.extraParams.initial_screen;
+
+        // Always set the title to be the one provided by the config
+        var pageTitle = config.extraParams.language_dictionary
+          ? config.extraParams.language_dictionary.title
+          : 'Log In or Sign Up to Continue';
+        document.getElementById('dynamic-page-title').innerText = pageTitle;
+
+        // Workaround: If request is coming from membership checkout page,
+        // set the initialScreen to Sign up page.
+        if (config.callbackURL.match('checkout%2Fpayment')) {
+          initialScreen = 'signUp';
+        }
+
+        var languageDictionary = {
+          signUpTerms:
+            "I agree to the <a href='https://acloud.guru/code-of-conduct' target='_new'>code of conduct</a>, <a href='https://acloud.guru/terms-of-use' target='_new'>terms of use</a> and <a href='https://acloud.guru/privacy' target='_new'>privacy policy</a>.",
+        };
+
+        var loginHint = config.extraParams.login_hint || getEmail();
+
+        var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
+          auth: {
+            redirectUrl: config.callbackURL,
+            responseType:
+              (config.internalOptions || {}).response_type ||
+              (config.callbackOnLocationHash ? 'token' : 'code'),
+            params: config.internalOptions,
+          },
+          avatar: null, // disable Auth0 gravatar prefetch
+          container: 'Auth0Container', // move from modal to inline
+          assetsUrl: config.assetsUrl,
+          allowedConnections: connection ? [connection] : null,
+          allowLogin: allowLogin,
+          allowSignUp: allowSignUp,
+          initialScreen: initialScreen,
+          rememberLastLogin: rememberLastLogin,
+          languageDictionary: languageDictionary,
+          theme: {
+            primaryColor: '#08c472',
+          },
+          prefill: loginHint
+            ? { email: loginHint, username: '_' }
+            : { username: '_' },
+          closable: false,
+          defaultADUsernameFromEmailPrefix: false,
+          configurationBaseUrl: 'https://cdn.auth0.com',
+          // required for production due to custom domain
+          overrides: {
+            __tenant: config.auth0Tenant,
+            __token_issuer: 'auth.acloud.guru',
+          },
+          additionalSignUpFields: [
+            { name: 'magic', placeholder: 'do not use this' },
+          ],
+          _enableIdPInitiatedLogin: true,
+          usernameStyle: 'email',
+        });
+
+        if (config.extraParams.error_message) {
+          lock.show({
+            flashMessage: {
+              type: 'error',
+              text: config.extraParams.error_message,
+            },
+          });
+        } else {
+          lock.on('signin ready', onReadySAML);
+          lock.on('signup ready', hideFields);
+          lock.on('signup submit', execReCaptcha);
+          lock.show({
+            flashMessage: {
+              type: 'info',
+              text:
+                'You can sign up using any of the options below!',
+            },
+          });
+        }
+
+        function mutationObserverCallback(mutationsList) {
+          mutationsList.forEach(mutation => {
+            mutation.addedNodes.forEach(addedNode => {
+              if (addedNode.className.includes('auth0-sso-notice-container')) {
+                document.getElementsByClassName(
+                  'auth0-lock-input-block auth0-lock-input-show-password auth0-lock-hidden'
+                )[0].style.display = 'none';
+              }
+            });
+          });
+        }
+
+        const mutationObserver = new MutationObserver(mutationObserverCallback);
+        lock.on('show', () => {
+          setTimeout(() => {
+            let authLockForm = document.getElementsByClassName(
+              'auth0-lock-form'
+            );
+            authLockForm = authLockForm && authLockForm[0];
+            if (authLockForm) {
+              mutationObserver.observe(authLockForm, {
+                childList: true,
+                subtree: true,
+              });
+            } else {
+              console.log("DOM didn't load in time");
+            }
+          }, 1000);
+        });
+
+        var CUSTOM_DOMAIN = 'auth.acloud.guru';
+        var AUTH0_DOMAIN = 'acloudguru.auth0.com';
+
+        // saml
+
+        var auth0PageSAML = [
+          'nn-group.com',
+          'nn.nl',
+          'nnip.com',
+          'nn.cz',
+          'nn.be',
+          'appdynamics.com',
+          'gamestop.com',
+        ];
+
+        var customPageSAML = ['ryantest.com', 'enlightedinc.com'];
+
+        function hideFields() {
+          $('input[name="username"]')
+            .parent()
+            .hide();
+          $('input[name="magic"]')
+            .parent()
+            .hide();
+        }
+
+        function execReCaptcha() {
+          $('.auth0-lock-error-invalid-hint').hide();
+
+          grecaptcha.ready(function() {
+            grecaptcha
+              .execute('6LfE-PYUAAAAAMTv-W8Mt0OuH-1At18XY24xR0Fj', {
+                action: 'validate_captcha',
+              })
+              .then(function(token) {
+                var options = {};
+                var email = $('input[name=email]').val();
+                var password = $('input[name=password]').val();
+                var username = $('input[name=username]').val();
+                var user_metadata = {
+                  action: 'validate_captcha',
+                  recaptcha: token,
+                };
+
+                // Fullstory
+                analytics.identify(email, {
+                  user_id: email,
+                  email: email,
+                });
+
+                // in some cases the length of the recaptcha token exceeds the allowed length for data posted to Auth0's endpoint
+                // so we split it here as an interim solution pending a better fix
+                if (token.length > 500) {
+                  user_metadata.recaptcha = token.substring(0, 500);
+                  user_metadata.recaptcha_split = token.substring(500);
+                }
+
+                options.email = email;
+                options.password = password;
+                if (username === '_') {
+                  // Only true when requires_username is ON
+                  options.username = email.replace(/@/g, '_');
+                }
+                options.user_metadata = user_metadata;
+                options.connection = defaultConnection;
+
+                var errorContainer = $(
+                  '.auth0-lock-content-body-wrapper div:first div'
+                );
+                var errorElement = $(errorContainer).find('span');
+
+                errorContainer.hide();
+                errorElement.remove('span');
+
+                webAuth.redirect.signupAndLogin(options, function(err) {
+                  if (err) {
+                    console.log(err);
+                    showFlashError(err);
+                  }
+                });
+              });
+          });
+        }
+
+        function showFlashError(error) {
+          var errorElement = $('<span class="animated fadeIn"></span>');
+          var errorContainer = $(
+            '.auth0-lock-content-body-wrapper div:first div'
+          );
+
+          if (error.code === 'user_exists' || error.code === 'invalid_signup') {
+            // errorText = error.description || 'Invalid Signup';
+            errorElement.append("Oops. We can't create your account. ");
+            const loginLink = $(
+              '<a href="javascript:void(0)">Login instead?</a>'
+            );
+            loginLink.on('click', function() {
+              $('.auth0-lock-tabs > li > a:contains("Log In")')[0].click();
+              errorContainer.hide();
+            });
+            errorElement.append(loginLink);
+          } else if (error.code === 'extensibility_error') {
+            errorElement.append(
+              'Something went wrong, please refresh and try again'
+            );
+          } else {
+            errorElement.append('Please try again later');
+          }
+
+          errorContainer.hide();
+          errorContainer.addClass(
+            'auth0-global-message auth0-global-message-error'
+          );
+          errorElement.appendTo(errorContainer);
+          errorContainer.show();
+        }
+
+        function onReadySAML() {
+          var emailField = document.querySelector('input[name="email"]');
+
+          if (emailField) {
+            emailField.addEventListener('input', changeEmailHandlerSAML);
+          }
+        }
+
+        function getSamlConnectionsByDomain(domain) {
+          var domainConnections = saml_connections.filter(function(each) {
+            return each.domain_alias === domain;
+          });
+
+          return domainConnections;
+        }
+
+        function addULElement(domainConnections, enterprisePanel) {
+          var multipleConnectionInfo =
+            '<p id="saml-connection-info">We noticed there are multiple connections for your email domain. Please click on the button you want to authenticate with.</p>';
+          var ul = $('<ul id=connectionList><br/></ul>');
+
+          ul.appendTo(enterprisePanel);
+          addButtons(domainConnections, ul);
+
+          if (domainConnections.length > 1) {
+            $('#connectionList').prepend(multipleConnectionInfo);
+          }
+        }
+
+        function addButtons(domainConnections, enterprisePanel) {
+          if (domainConnections && domainConnections.length > 0) {
+            domainConnections.forEach(function(connection, index) {
+              initConnection(enterprisePanel, connection, index);
+            });
+          }
+        }
+
+        function initConnection(ul, connection, index) {
+          var link = $(
+            '<li><button class="btn"><img class="custom_icon" src="' +
+              connection.src +
+              '" /><span>' +
+              connection.title +
+              '</span></button></li><br/>'
+          );
+          link.appendTo(ul);
+          link.on('click', function(e) {
+            e.preventDefault();
+            webAuth.authorize({ connection: connection.connection_name });
+          });
+        }
+
+        function showSamlLoginButtons(domainConnections, emailInput) {
+          var enterprisePanel = $(
+            '.auth0-lock-input-block.auth0-lock-input-email'
+          );
+
+          emailInput.hide();
+          $('.auth0-lock-submit').hide();
+          addULElement(domainConnections, enterprisePanel);
+        }
+
+        function changeEmailHandlerSAML(event) {
+          var domain = event.target.value.split('@')[1];
+          var domainConnections = getSamlConnectionsByDomain(domain);
+          var emailField = $(
+            '.auth0-lock-input-show-password, .auth0-lock-alternative-link'
+          );
+
+          if (event.target.value) {
+            $('#connectionList').remove();
+
+            if (domainConnections.length >= 1) {
+              showSamlLoginButtons(domainConnections, emailField);
+            } else {
+              $('#connectionList').remove();
+              $('.auth0-lock-submit').show();
+              emailField.show();
+            }
+
+            if (auth0PageSAML.indexOf(domain) > -1) {
+              redirectLogin(AUTH0_DOMAIN, event.target.value);
+            } else if (customPageSAML.indexOf(domain) > -1) {
+              redirectLogin(CUSTOM_DOMAIN, event.target.value);
+            }
+          }
+        }
+
+        // utils
+
+        function redirectLogin(hostRedirect, email) {
+          var protocol = window.location.protocol || 'https:';
+          var host = window.location.host || window.location.hostname;
+          var pathname = window.location.pathname || '/login';
+          var search = window.location.search;
+
+          if (host !== hostRedirect) {
+            var url = protocol + '//' + hostRedirect + pathname + search;
+            url = url + (email ? '&email=' + encodeURIComponent(email) : '');
+            window.location.replace(url);
+          }
+        }
+
+        function getEmail() {
+          var str = '&email=';
+          var url = window.location.href;
+          var emailIndex = url.lastIndexOf(str);
+          var email = null;
+
+          if (emailIndex > -1) {
+            email = decodeURIComponent(url.substring(emailIndex + str.length));
+          }
+
+          return email;
+        }
+      });
+    </script>
+  </body>
+</html>
